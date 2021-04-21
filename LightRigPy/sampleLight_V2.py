@@ -32,6 +32,8 @@ class LightSetPanel(bpy.types.Panel):
         row.prop(ob.light_rig,"color")
         row=layout.row()
         row.prop(ob.light_rig, "intensity")
+        row=layout.row()
+        row.prop(ob.light_rig, "scale")
         
 
 class LIGHT_RIG(bpy.types.Operator):
@@ -97,6 +99,8 @@ def updateIntensity(self,context):
     light = obj.data
     light.energy = self.intensity
     light.color = self.color
+    obj.scale[0]= self.scale
+    obj.scale[1]= self.scale
 
 class LightParamSet(bpy.types.PropertyGroup):
 
@@ -110,6 +114,12 @@ class LightParamSet(bpy.types.PropertyGroup):
         name="Light Color",
         subtype="COLOR",
         default=(1,1,1),
+        update = updateIntensity)
+    scale: FloatProperty(
+        name="Scale",
+        subtype="NONE",
+        default=5,
+        min=1, max= 100,
         update = updateIntensity)
 
 def register():

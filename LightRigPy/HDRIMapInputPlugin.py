@@ -67,10 +67,10 @@ def updatehdri(self,context):
     coord = bpy.types.ShaderNodeTexEnvironment
     nodes = [s for s in node
             if isinstance (s, coord)]
-    
-    for i in range(len(nodes)):
+    steps = len(nodes)
+    for i in range(steps):
         nodes[i].image = bpy.data.images.load(self.hdri)
-    
+  
     
         
 class materialSet(bpy.types.PropertyGroup):

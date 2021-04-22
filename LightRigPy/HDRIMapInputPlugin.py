@@ -68,7 +68,10 @@ def updatehdri(self,context):
     nodes = [s for s in node
             if isinstance (s, coord)]
     
-    nodes[0].image = bpy.data.images.load(self.hdri)
+    for i in range(len(nodes)):
+        nodes[i].image = bpy.data.images.load(self.hdri)
+    #nodes[0].image= bpy.data.images.load(self.hdri)
+    
         
 class materialSet(bpy.types.PropertyGroup):
 

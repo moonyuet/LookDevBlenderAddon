@@ -1,0 +1,1 @@
+blender.exe -P cameraImportV2.py -P HDRIMapInputPlugin.py -P renderSetting.py -P sampleLight_V2.py

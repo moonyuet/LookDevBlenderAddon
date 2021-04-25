@@ -33,6 +33,9 @@ class CameraSetPanel(bpy.types.Panel):
         row.operator("back.cambuild_operator")
         row = layout.row()
         row.prop(da.myCamView, "lock")
+        row = layout.row()
+        row.operator("cam.set_operator")
+      
 
 class FRN_CAM(bpy.types.Operator):
 
@@ -91,11 +94,28 @@ class BACK_CAM(bpy.types.Operator):
         bpy.context.collection.objects.link(cam_obIV)
         return {"FINISHED"}
     
+class SET_CAM(bpy.types.Operator):
+
+    bl_label = "Set Camera"
+    bl_idname = "cam.set_operator"
+
+    def execute(self, context):
+        
+        da = bpy.context.space_data
+        obj = bpy.context.active_object
+        da.camera = obj
+        
+        return {"FINISHED"}
+
+    
 def lockCameraToView(self,context):
     da = bpy.context.space_data
     da.lock_camera= self.lock
     
+
+    
 class CAMDRIVENSET(bpy.types.PropertyGroup):
+    
     lock: BoolProperty(
         name="Lock Camera To View",
         subtype="NONE",
@@ -109,6 +129,7 @@ def register():
     bpy.utils.register_class(LEFT_CAM)
     bpy.utils.register_class(RIGHT_CAM)
     bpy.utils.register_class(BACK_CAM)
+    bpy.utils.register_class(SET_CAM)
     bpy.utils.register_class(CAMDRIVENSET)
     bpy.types.Scene.myCamView = PointerProperty(type=CAMDRIVENSET)
 
@@ -118,6 +139,7 @@ def unregister():
     bpy.utils.unregister_class(LEFT_CAM)
     bpy.utils.unregister_class(RIGHT_CAM)
     bpy.utils.unregister_class(BACK_CAM)
+    bpy.utils.unregister_class(SET_CAM)
     bpy.utils.unregister_class(CAMDRIVENSET)
     del bpy.types.Scene.myCamView
  

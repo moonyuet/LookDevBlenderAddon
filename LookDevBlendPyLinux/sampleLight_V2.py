@@ -105,23 +105,32 @@ class LIGHT_RIG(bpy.types.Operator):
         return {'FINISHED'}
     
 def updateIntensity(self,context):
-    obj = bpy.context.active_object
+
+    #TODO:make attributes for each lighting
+    l_objects = [o for o in bpy.data.objects
+                if o.type == 'LIGHT']
+    l_objects[0].data.energy = self.bckintensity
+    l_objects[1].data.energy = self.frnintensity
+    l_objects[2].data.energy = self.keyintensity
+    l_objects[3].data.energy = self.rimintensity
+    
+def updateColor(self,context):
+    
+    lp_objects = [o for o in bpy.data.objects
+                if o.type == 'LIGHT']
+    
+    lp_objects[0].data.color = self.bckCol
+    lp_objects[1].data.color = self.frnCol
+    lp_objects[2].data.color = self.keyCol
+    lp_objects[3].data.color = self.rimCol
+    
+def updateScale(self,context):
+    
     lamp_objects = [o for o in bpy.data.objects
                 if o.type == 'LIGHT']
-                
-    lamp_objects[0].data.energy = self.bckintensity
-    lamp_objects[0].data.color = self.bckCol
-    lamp_objects[1].data.energy = self.frnintensity
-    lamp_objects[1].data.color = self.frnCol
-    lamp_objects[2].data.energy = self.keyintensity
-    lamp_objects[2].data.color = self.keyCol
-    lamp_objects[3].data.energy = self.rimintensity
-    lamp_objects[3].data.color = self.rimCol
-    #TODO:make attributes for each lighting
     for o in lamp_objects:
         o.scale[0]= self.scale
         o.scale[1]= self.scale
-        
 
 class LightParamSet(bpy.types.PropertyGroup):
 
@@ -135,11 +144,10 @@ class LightParamSet(bpy.types.PropertyGroup):
     bckCol: FloatVectorProperty(
         name="Back Light Color",
         subtype="COLOR",
-        size = 4,
-        min = 0.0,
-        max = 1.0,
-        default=(1,1,1,1),
-        update = updateIntensity)
+        min = 0.0, max = 1.0,
+        size = 3,
+        default=(1,1,1),
+        update = updateColor)
         
     frnintensity: FloatProperty(
         name="Front Light Intensity",
@@ -151,11 +159,10 @@ class LightParamSet(bpy.types.PropertyGroup):
     frnCol: FloatVectorProperty(
         name="Front Light Color",
         subtype="COLOR",
-        size = 4,
-        min = 0.0,
-        max = 1.0,
-        default=(1,1,1,1),
-        update = updateIntensity)
+        min = 0.0, max = 1.0,
+        size = 3,
+        default=(1,1,1),
+        update = updateColor)
     
     keyintensity: FloatProperty(
         name="Key Light Intensity",
@@ -167,11 +174,10 @@ class LightParamSet(bpy.types.PropertyGroup):
     keyCol: FloatVectorProperty(
         name="Key Light Color",
         subtype="COLOR",
-        size = 4,
-        min = 0.0,
-        max = 1.0,
-        default=(1,1,1,1),
-        update = updateIntensity)
+        min = 0.0, max = 1.0,
+        size = 3,
+        default=(1,1,1),
+        update = updateColor)
     
     rimintensity: FloatProperty(
         name="Rim Light Intensity",
@@ -183,18 +189,17 @@ class LightParamSet(bpy.types.PropertyGroup):
     rimCol: FloatVectorProperty(
         name="Rim Light Color",
         subtype="COLOR",
-        size = 4,
-        min = 0.0,
-        max = 1.0,
-        default=(1,1,1,1),
-        update = updateIntensity)
+        min = 0.0, max = 1.0,
+        size = 3,
+        default=(1,1,1),
+        update = updateColor)
         
     scale: FloatProperty(
         name="Scale",
         subtype="NONE",
         default=5,
         min=1, max= 500,
-        update = updateIntensity)
+        update = updateScale)
 
 def register():
     bpy.utils.register_class(LightSetPanel)

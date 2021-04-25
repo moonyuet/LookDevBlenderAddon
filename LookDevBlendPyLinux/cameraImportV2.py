@@ -34,6 +34,8 @@ class CameraSetPanel(bpy.types.Panel):
         row = layout.row()
         row.prop(da.myCamView, "lock")
         row = layout.row()
+        row.label(text="Select ONE Camera as RenderCam")
+        row = layout.row()
         row.operator("cam.set_operator")
       
 

@@ -129,59 +129,71 @@ class LightParamSet(bpy.types.PropertyGroup):
         name="Back Light Intensity",
         subtype="POWER",
         default= 16,
-        min=0, max= 100,
+        min=0, max= 500,
         update = updateIntensity)
     
     bckCol: FloatVectorProperty(
         name="Back Light Color",
         subtype="COLOR",
-        default=(1,1,1),
+        size = 4,
+        min = 0.0,
+        max = 1.0,
+        default=(1,1,1,1),
         update = updateIntensity)
         
     frnintensity: FloatProperty(
         name="Front Light Intensity",
         subtype="POWER",
         default= 8,
-        min=0, max= 100,
+        min=0, max= 500,
         update = updateIntensity)
     
     frnCol: FloatVectorProperty(
         name="Front Light Color",
         subtype="COLOR",
-        default=(1,1,1),
+        size = 4,
+        min = 0.0,
+        max = 1.0,
+        default=(1,1,1,1),
         update = updateIntensity)
     
     keyintensity: FloatProperty(
         name="Key Light Intensity",
         subtype="POWER",
         default= 12,
-        min=0, max= 100,
+        min=0, max= 500,
         update = updateIntensity)
     
     keyCol: FloatVectorProperty(
         name="Key Light Color",
         subtype="COLOR",
-        default=(1,1,1),
+        size = 4,
+        min = 0.0,
+        max = 1.0,
+        default=(1,1,1,1),
         update = updateIntensity)
     
     rimintensity: FloatProperty(
         name="Rim Light Intensity",
         subtype="POWER",
         default= 10,
-        min=0, max= 100,
+        min=0, max= 500,
         update = updateIntensity)
     
     rimCol: FloatVectorProperty(
         name="Rim Light Color",
         subtype="COLOR",
-        default=(1,1,1),
+        size = 4,
+        min = 0.0,
+        max = 1.0,
+        default=(1,1,1,1),
         update = updateIntensity)
         
     scale: FloatProperty(
         name="Scale",
         subtype="NONE",
         default=5,
-        min=1, max= 100,
+        min=1, max= 500,
         update = updateIntensity)
 
 def register():

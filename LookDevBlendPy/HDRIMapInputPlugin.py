@@ -31,7 +31,7 @@ class HdriLightPanel(bpy.types.Panel):
         row=layout.row()
         row.prop(world.my_hdri, "hdri")
         row=layout.row()
-        row.prop(scn.my_hdri, "trans")
+        row.prop(world.my_hdri, "trans")
 
 class ENV_MAP(bpy.types.Operator):
     bl_label = "EnvLight"

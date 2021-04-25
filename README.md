@@ -22,3 +22,15 @@ bash executepy.sh
 4. It loads blender with the Add-ons installed
 5. Enjoy!
 
+
+Light Rig Add-on
+
+![alt text](https://github.com/moonyuet/LookDevBlenderAddon/blob/main/Addon%20Screenshot/Capture.PNG?raw=true)
+
+Camera Add-on
+
+![alt text](https://github.com/moonyuet/LookDevBlenderAddon/blob/main/Addon%20Screenshot/Capture3.PNG?raw=true)
+
+Render Setting Add-on
+
+![alt text](https://github.com/moonyuet/LookDevBlenderAddon/blob/main/Addon%20Screenshot/Capture2.PNG?raw=true)

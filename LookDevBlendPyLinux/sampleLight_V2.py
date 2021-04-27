@@ -1,5 +1,5 @@
 bl_info ={
-    "name": "Material Creation",
+    "name": "Light Rig",
     "author" : "Kayla Man",
     "version" : (1,0),
     "blender" : (2,91,0),

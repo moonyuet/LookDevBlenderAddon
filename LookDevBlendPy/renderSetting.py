@@ -8,7 +8,7 @@ class RenderSetPanel(bpy.types.Panel):
     bl_idname = "RENDER_PT_PANEL"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "Render"
+    bl_category = "GPU Render"
 
     def draw(self, context):
         layout = self.layout
@@ -66,8 +66,7 @@ class CYCLE(bpy.types.Operator):
         rn.engine = "CYCLES"
         scn.cycles.device = "GPU"
 
-        return {"FINISHED"}
-        
+        return {"FINISHED"}        
 
 def updateRes(self, context):
     render = bpy.context.scene.render

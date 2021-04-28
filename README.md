@@ -14,8 +14,9 @@ For Windows, make sure to include **blender** as the path in the environment var
 
 For Linux, make sure to include **blender** as $PATH (i.e.enviornment variable) in your computer
 1. Download the **LookDevBlendPyLinux** folder
-2. open Ubuntu, and locates the folder (the directory you store it)
-3. Run the sh script with the command below
+2. Unzips the folder
+3. open Ubuntu, and locates the folder (the directory you store it)
+4. Run the sh script with the command below
 ```
 bash executepy.sh
  ```

@@ -1,11 +1,6 @@
 
 import bpy
-#rendering engine 
-#1 CYCLE
-#2 Eevee
 
-#samples
-#previewSample
 from bpy.props import IntProperty, FloatProperty, PointerProperty, BoolProperty
 class RenderSetPanel(bpy.types.Panel):
 
@@ -70,7 +65,6 @@ class CYCLE(bpy.types.Operator):
         rn = scn.render
         rn.engine = "CYCLES"
         scn.cycles.device = "GPU"
-        scn.cycles.progressive = "PATH"
 
         return {"FINISHED"}
         

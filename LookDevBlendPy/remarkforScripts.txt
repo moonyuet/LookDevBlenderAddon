@@ -1,5 +1,0 @@
-For Render Setting:
-bpy.types.Scene.attr
-
-For HDRI map:
-bpy.types.World.my_hdri

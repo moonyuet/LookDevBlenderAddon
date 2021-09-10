@@ -51,7 +51,7 @@ class ENV_MAP(bpy.types.Operator):
         texture_coord = world.node_tree.nodes.new("ShaderNodeTexCoord")
         world.node_tree.links.new(texture_coord.outputs[0], mapping.inputs[0])
         #TODO: set uv rotation.z to 45 degrees
-        world.node_tree.links.new (env_tex.outputs[0], env_light.inputs[0])
+        world.node_tree.links.new(env_tex.outputs[0], env_light.inputs[0])
        
         return {"FINISHED"}
 
@@ -64,7 +64,7 @@ class DELHDRI(bpy.types.Operator):
         node_del = wrd.node_tree.nodes["Environment Texture"]
         mapping_del = wrd.node_tree.nodes["Mapping"]
         coord_del = wrd.node_tree.nodes["Texture Coordinate"]
-        
+            
         wrd.node_tree.nodes.remove( node_del )
         wrd.node_tree.nodes.remove( mapping_del )
         wrd.node_tree.nodes.remove( coord_del )

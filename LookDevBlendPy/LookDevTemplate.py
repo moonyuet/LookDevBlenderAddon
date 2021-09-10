@@ -27,7 +27,11 @@ class materialCleanUpPanel(bpy.types.Panel):
         row.prop(world.my_hdri, "hdri")
         row=layout.row()
         row.prop(world.my_hdri, "degree")
-
+        
+        cam = scn.camera
+        row = layout.row()
+        row.prop(cam.my_transform, "distance")
+        
 class MAT_CLEARNUP(bpy.types.Operator):
     
     bl_label = "Material Cleanup"
@@ -55,9 +59,16 @@ class CAM_SETUP(bpy.types.Operator):
         rot = bpy.context.object.rotation_euler
 
         camera.location = (0.0, loc[1]-5, 0.0)
-        camera.rotation_euler = (math.radians(90), rot[1], rot[2])
-        
+        camera.rotation_euler = (math.radians(90), 0, 0)
+     
         return {"FINISHED"}
+    
+def updateCam(self,context):
+    loc = bpy.context.object.location
+    camera = bpy.context.scene.camera
+    param = self.distance
+    camera.location[1] = self.distance
+    
 class HDRI_MAP(bpy.types.Operator):
     bl_label = "HDRI Setup"
     bl_idname = "hdri.setup_operator"
@@ -77,7 +88,7 @@ class HDRI_MAP(bpy.types.Operator):
         texture_coord = world.node_tree.nodes.new("ShaderNodeTexCoord")
         world.node_tree.links.new(texture_coord.outputs[0], mapping.inputs[0])
         #TODO: set uv rotation.z to 45 degrees
-        world.node_tree.links.new (env_tex.outputs[0], env_light.inputs[0])
+        world.node_tree.links.new(env_tex.outputs[0], env_light.inputs[0])
        
         return {"FINISHED"}
 def updatehdri(self,context):
@@ -113,6 +124,13 @@ class hdriSet(bpy.types.PropertyGroup):
             min=0.0, max= 360.0,
             default=45.0,
             update=setHdriRotation)
+class camSet(bpy.types.PropertyGroup):
+    distance: FloatProperty(
+            name = "Zoom In/Out",
+            subtype="NONE",
+            min=-200.0, max= 200.0,
+            default=0.0,
+            update=updateCam)
              
 
 def register():
@@ -121,15 +139,18 @@ def register():
     bpy.utils.register_class(CAM_SETUP)
     bpy.utils.register_class(HDRI_MAP)
     bpy.utils.register_class(hdriSet)
-    bpy.types.World.my_hdri=PointerProperty(type=hdriSet)
-   
+    bpy.utils.register_class(camSet)
+    bpy.types.World.my_hdri = PointerProperty(type = hdriSet)
+    bpy.types.Object.my_transform = PointerProperty(type = camSet)
 def unregister():
     bpy.utils.unregister_class(materialCleanUpPanel)
     bpy.utils.unregister_class(MAT_CLEARNUP)
     bpy.utils.unregister_class(CAM_SETUP)
     bpy.utils.unregister_class(HDRI_MAP)
     bpy.utils.unregister_class(hdriSet)
+    bpy.utils.unregister_class(camSet)
     del bpy.types.World.my_hdri
+    del bpy.types.Object.my_transform
 
 if __name__ == "__main__":
     register()
